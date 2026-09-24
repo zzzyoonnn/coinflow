@@ -3,7 +3,20 @@ package main
 import (
 	"fmt"
 	ecc "github.com/zzzyoonnn/coinflow/elliptic-curve"
+	"math/rand"
 )
+
+func SolveField19MultiplySet() {
+	// randomly select a num from 1 to 18
+	min := 1
+	max := 18
+	k := rand.Intn(max-min+1) + min
+	fmt.Printf("randomly select k is %d\n", k)
+	element := ecc.NewFieldElement(19, uint64(k))
+	for i := 0; i < 19; i++ {
+		fmt.Printf("element %d multiply with %d is %v", k, i, element.ScalarMul(uint64(i)))
+	}
+}
 
 func main() {
 	f44 := ecc.NewFieldElement(57, 44)
@@ -23,5 +36,9 @@ func main() {
 	fmt.Printf("field element 46 + 44 is %v", f46.Add(f44))
 
 	fmt.Printf("multiply 46 with itself is %v", f46.Multiply(f46))
-	fmt.Printf("element 46 with the power of 2 is %v", f46.Power(2))
+	fmt.Printf("element 46 with the power of 2 is %v\n", f46.Power(2))
+
+	// {0, 1, ..., 18}, select any element from the field with order 19, compute following:
+	// // {k.0, k.1, k.2, ..., k.18}, k != 0
+	SolveField19MultiplySet()
 }
