@@ -19,6 +19,25 @@ func SolveField19MultiplySet() {
 	}
 }
 
+/*
+p is field order, p = 7, 11, 17, 19, 31
+for every non-zero element k, compute k ^ (p - 1) mod p equals 1
+=> {1 ^ (p - 1) % p, 2 ^ (p - 1) % p, ..., (p - 1) ^ (p - 1) % p}
+
+for any element k in the field with order => k ^ (p - 1) % p == 1
+*/
+
+func ComputeFieldOrderPower() {
+	orders := []int{7, 11, 17, 19, 31}
+	for _, p := range orders {
+		fmt.Printf("value of p is %d\n", p)
+		for i := 1; i < p; i++ {
+			elm := ecc.NewFieldElement(big.NewInt(int64(p)), big.NewInt(int64(i)))
+			fmt.Printf("for element %vits power of p - 1 is %v\n", elm, elm.Power(big.NewInt(int64(p-1))))
+		}
+	}
+}
+
 func main() {
 	f44 := ecc.NewFieldElement(big.NewInt(57), big.NewInt(44))
 	f33 := ecc.NewFieldElement(big.NewInt(57), big.NewInt(33))
@@ -42,4 +61,6 @@ func main() {
 	// {0, 1, ..., 18}, select any element from the field with order 19, compute following:
 	// // {k.0, k.1, k.2, ..., k.18}, k != 0
 	SolveField19MultiplySet()
+
+	ComputeFieldOrderPower()
 }
