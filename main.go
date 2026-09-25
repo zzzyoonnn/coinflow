@@ -4,9 +4,10 @@ import (
 	"fmt"
 	ecc "github.com/zzzyoonnn/coinflow/elliptic-curve"
 	"math/big"
-	"math/rand"
+	//"math/rand" use 'Finite field'
 )
 
+/* Finite field
 func SolveField19MultiplySet() {
 	// randomly select a num from 1 to 18
 	min := 1
@@ -19,13 +20,11 @@ func SolveField19MultiplySet() {
 	}
 }
 
-/*
-p is field order, p = 7, 11, 17, 19, 31
-for every non-zero element k, compute k ^ (p - 1) mod p equals 1
-=> {1 ^ (p - 1) % p, 2 ^ (p - 1) % p, ..., (p - 1) ^ (p - 1) % p}
+// p is field order, p = 7, 11, 17, 19, 31
+// for every non-zero element k, compute k ^ (p - 1) mod p equals 1
+// => {1 ^ (p - 1) % p, 2 ^ (p - 1) % p, ..., (p - 1) ^ (p - 1) % p}
 
-for any element k in the field with order => k ^ (p - 1) % p == 1
-*/
+// for any element k in the field with order => k ^ (p - 1) % p == 1
 
 func ComputeFieldOrderPower() {
 	orders := []int{7, 11, 17, 19, 31}
@@ -72,4 +71,28 @@ func main() {
 	fmt.Printf("field element 46 * 46 with order 59 is %v", f46.Multiply(f46))
 	fmt.Printf("field element 46 with power of 60 is %v", f46.Power(big.NewInt(int64(60))))
 	// 60 % (59 - 1) = 2
+}
+*/
+
+// Elliptic curve
+func main() {
+	// check point(-1, -1) on curve y ^ 2 = x ^ 3 + 5x + 7
+	ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	fmt.Println("Point(-1, -1) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+
+	// check point(-1, -2) on curve y ^ 2 = x ^ 3 + 5x + 7
+	// ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-2)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	// fmt.Println("Point(-1, -2) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+
+	// check point(2, 4) on curve y ^ 2 = x ^ 3 + 5x + 7
+	// ecc.NewEllipticCurvePoint(big.NewInt(int64(2)), big.NewInt(int64(4)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	// fmt.Println("Point(2, 4) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+
+	// check point(18, 77) on curve y ^ 2 = x ^ 3 + 5x + 7
+	ecc.NewEllipticCurvePoint(big.NewInt(int64(18)), big.NewInt(int64(77)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	fmt.Println("Point(18, 77) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+
+	// check point(5, 7) on curve y ^ 2 = x ^ 3 + 5x + 7
+	// ecc.NewEllipticCurvePoint(big.NewInt(int64(5)), big.NewInt(int64(7)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	// fmt.Println("Point(5, 7) is on curve y ^ 2 = x ^ 3 + 5x + 7")
 }
