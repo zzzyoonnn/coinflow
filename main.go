@@ -63,4 +63,13 @@ func main() {
 	SolveField19MultiplySet()
 
 	ComputeFieldOrderPower()
+
+	f2 := ecc.NewFieldElement(big.NewInt(int64(19)), big.NewInt(int64(2)))
+	f7 := ecc.NewFieldElement(big.NewInt(int64(19)), big.NewInt(int64(7)))
+	fmt.Printf("field element 2 / 7 with order 19 is %v", f2.Divide(f7))
+
+	f46 = ecc.NewFieldElement(big.NewInt(int64(59)), big.NewInt((int64(46))))
+	fmt.Printf("field element 46 * 46 with order 59 is %v", f46.Multiply(f46))
+	fmt.Printf("field element 46 with power of 60 is %v", f46.Power(big.NewInt(int64(60))))
+	// 60 % (59 - 1) = 2
 }
