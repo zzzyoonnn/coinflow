@@ -76,23 +76,13 @@ func main() {
 
 // Elliptic curve
 func main() {
-	// check point(-1, -1) on curve y ^ 2 = x ^ 3 + 5x + 7
-	ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	fmt.Println("Point(-1, -1) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+	// check point(-1, -1) on curve y^2 = x^3 + 5x + 7
+	// A + I = A
+	p := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	fmt.Printf("p is %s\n", p)
 
-	// check point(-1, -2) on curve y ^ 2 = x ^ 3 + 5x + 7
-	// ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-2)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	// fmt.Println("Point(-1, -2) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+	identity := ecc.NewEllipticCurvePoint(nil, nil, big.NewInt(int64(5)), big.NewInt(int64(7)))
 
-	// check point(2, 4) on curve y ^ 2 = x ^ 3 + 5x + 7
-	// ecc.NewEllipticCurvePoint(big.NewInt(int64(2)), big.NewInt(int64(4)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	// fmt.Println("Point(2, 4) is on curve y ^ 2 = x ^ 3 + 5x + 7")
-
-	// check point(18, 77) on curve y ^ 2 = x ^ 3 + 5x + 7
-	ecc.NewEllipticCurvePoint(big.NewInt(int64(18)), big.NewInt(int64(77)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	fmt.Println("Point(18, 77) is on curve y ^ 2 = x ^ 3 + 5x + 7")
-
-	// check point(5, 7) on curve y ^ 2 = x ^ 3 + 5x + 7
-	// ecc.NewEllipticCurvePoint(big.NewInt(int64(5)), big.NewInt(int64(7)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	// fmt.Println("Point(5, 7) is on curve y ^ 2 = x ^ 3 + 5x + 7")
+	res := p.Add(identity)
+	fmt.Printf("Result of p add to identity is %s\n", res)
 }

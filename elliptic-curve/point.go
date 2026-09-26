@@ -45,6 +45,14 @@ func OpOnBig(x *big.Int, y *big.Int, opType OP_TYPE) *big.Int {
 }
 
 func NewEllipticCurvePoint(x *big.Int, y *big.Int, a *big.Int, b *big.Int) *Point {
+	if x == nil && y == nil {
+		return &Point{
+			x: x,
+			y: y,
+			a: a,
+			b: b,
+		}
+	}
 	left := OpOnBig(y, big.NewInt(int64(2)), EXP)
 	x3 := OpOnBig(x, big.NewInt(int64(3)), EXP)
 	ax := OpOnBig(a, x, MUL)
@@ -61,6 +69,28 @@ func NewEllipticCurvePoint(x *big.Int, y *big.Int, a *big.Int, b *big.Int) *Poin
 		a: a,
 		b: b,
 	}
+}
+
+func (p *Point) Add(other *Point) *Point {
+	// check two points are on the same curve
+	if p.a.Cmp(other.a) != 0 || p.b.Cmp(other.b) != 0 {
+		panic("given two points are not on the same curve")
+	}
+
+	if p.x == nil {
+		return other
+	}
+
+	if other.x == nil {
+		return p
+	}
+
+	// TODO
+	return nil
+}
+
+func (p *Point) String() string {
+	return fmt.Sprintf("(x:%s, y:%s, a:%s, b:%s)", p.x.String(), p.y.String(), p.a.String(), p.b.String())
 }
 
 func (p *Point) Equal(other *Point) bool {
