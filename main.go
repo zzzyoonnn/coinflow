@@ -85,4 +85,15 @@ func main() {
 
 	res := p.Add(identity)
 	fmt.Printf("Result of p add to identity is %s\n", res)
+
+	// P(-1, -1) + P2(-1, 1)
+	p2 := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	res = p.Add(p2)
+	fmt.Printf("result of adding points on vertical line: %s\n", res)
+
+	// C = A(2, 5) + B(-1, -1)
+	A := ecc.NewEllipticCurvePoint(big.NewInt(int64(2)), big.NewInt(int64(5)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	B := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
+	C := A.Add(B)
+	fmt.Printf("A(2, 5) + B(-1, -1) = %s", C)
 }
