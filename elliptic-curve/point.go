@@ -97,8 +97,20 @@ func (p *Point) Add(other *Point) *Point {
 
 	// find slope of line AB
 	// x1 -> p.x, y1 -> p.y, x2 -> other.x, y2 -> other.y
-	numerator := OpOnBig(other.y, p.y, SUB)   // (y2 - y1)
-	denominator := OpOnBig(other.x, p.x, SUB) // (x2 - x1)
+	var numerator *big.Int
+	var denominator *big.Int
+	if p.x.Cmp(other.x) == 0 && p.y.Cmp(other.y) == 0 {
+		// slope = (3*x^2 + a) / 2y
+		xSquared := OpOnBig(p.x, big.NewInt(int64(2)), EXP)
+		threeXSquared := OpOnBig(xSquared, big.NewInt(int64(3)), MUL)
+		numerator = OpOnBig(threeXSquared, p.a, ADD)
+
+		// denominator: 2y
+		denominator = OpOnBig(p.y, big.NewInt(int64(2)), MUL)
+	} else {
+		numerator = OpOnBig(other.y, p.y, SUB)   // (y2 - y1)
+		denominator = OpOnBig(other.x, p.x, SUB) // (x2 - x1)
+	}
 
 	// s = (y2 - y1) / (x2 - x1)
 	slope := OpOnBig(numerator, denominator, DIV)
