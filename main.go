@@ -76,28 +76,10 @@ func main() {
 
 // Elliptic curve
 func main() {
-	// check point(-1, -1) on curve y^2 = x^3 + 5x + 7
-	// A + I = A
-	p := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	fmt.Printf("p is %s\n", p)
-
-	identity := ecc.NewEllipticCurvePoint(nil, nil, big.NewInt(int64(5)), big.NewInt(int64(7)))
-
-	res := p.Add(identity)
-	fmt.Printf("Result of p add to identity is %s\n", res)
-
-	// P(-1, -1) + P2(-1, 1)
-	p2 := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	res = p.Add(p2)
-	fmt.Printf("result of adding points on vertical line: %s\n", res)
-
-	// C = A(2, 5) + B(-1, -1)
-	A := ecc.NewEllipticCurvePoint(big.NewInt(int64(2)), big.NewInt(int64(5)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	B := ecc.NewEllipticCurvePoint(big.NewInt(int64(-1)), big.NewInt(int64(-1)), big.NewInt(int64(5)), big.NewInt(int64(7)))
-	C := A.Add(B)
-	fmt.Printf("A(2, 5) + B(-1, -1) = %s\n", C)
-
-	// C = B + B
-	C = B.Add(B)
-	fmt.Printf("B(-1, -1) + B(-1, -1) = %s\n", C)
+	x1 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(192)))
+	y1 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(105)))
+	a := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(0)))
+	b := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(7)))
+	p1 := ecc.NewEllipticCurvePoint(x1, y1, a, b)
+	fmt.Printf("elliptic curve point over finite field is %s\n", p1)
 }
