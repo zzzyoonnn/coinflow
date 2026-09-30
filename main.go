@@ -82,4 +82,18 @@ func main() {
 	b := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(7)))
 	p1 := ecc.NewEllipticCurvePoint(x1, y1, a, b)
 	fmt.Printf("elliptic curve point over finite field is %s\n", p1)
+
+	yNeg := y1.Negate()
+	p2 := ecc.NewEllipticCurvePoint(x1, yNeg, a, b)
+	res := p1.Add(p2)
+	fmt.Printf("addition of points on vertical line over finite field is %s\n", res)
+
+	x2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(17)))
+	y2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(56)))
+	p3 := ecc.NewEllipticCurvePoint(x2, y2, a, b)
+	res = p1.Add(p3)
+	fmt.Printf("p1 + p2 over field order 223 is %s\n", res)
+
+	res = p1.Add(p1)
+	fmt.Printf("p1 + p1 over field order 223 is %s\n", res)
 }
