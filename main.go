@@ -90,7 +90,7 @@ func main() {
 
 	x2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(17)))
 	y2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(56)))
-	p2 := ecc.NewEllipticCurvePoint(x2, y2, a, b)
+	p2 = ecc.NewEllipticCurvePoint(x2, y2, a, b)
 	res = p1.Add(p2)
 	fmt.Printf("p1 + p2 over field order 223 is %s\n", res)
 
@@ -126,4 +126,34 @@ func main() {
 	p2 = ecc.NewEllipticCurvePoint(x2, y2, a, b)
 	res = p1.Add(p2)
 	fmt.Printf("p1(143, 98) + p2(76, 66) over field order 223 is %s\n", res)
+
+	// ScalarMul
+	// 2 * (192, 105)
+	x1 = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(192)))
+	y1 = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(105)))
+	a = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(0)))
+	b = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(7)))
+	p1 = ecc.NewEllipticCurvePoint(x1, y1, a, b)
+	fmt.Printf("2 * (192, 105) is: %s\n", p1.ScalarMul(big.NewInt(int64(2))))
+
+	// 2 * (143, 98)
+	x2 = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(143)))
+	y2 = ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(98)))
+	p2 = ecc.NewEllipticCurvePoint(x2, y2, a, b)
+	fmt.Printf("2 * (143, 98) is: %s\n", p2.ScalarMul(big.NewInt(int64(2))))
+
+	// 2 * (47, 71)
+	x3 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(47)))
+	y3 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(71)))
+	p3 := ecc.NewEllipticCurvePoint(x3, y3, a, b)
+	fmt.Printf("2 * (47, 71) is: %s\n", p3.ScalarMul(big.NewInt(int64(2))))
+
+	// 4 * (47, 71)
+	fmt.Printf("4 * (47, 71) is: %s\n", p3.ScalarMul(big.NewInt(int64(4))))
+
+	// 8 * (47, 71)
+	fmt.Printf("8 * (47, 71) is: %s\n", p3.ScalarMul(big.NewInt(int64(8))))
+
+	// 21 * (47, 71)
+	fmt.Printf("21 * (47, 71) is: %s\n", p3.ScalarMul(big.NewInt(int64(21))))
 }
