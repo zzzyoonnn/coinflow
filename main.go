@@ -90,8 +90,8 @@ func main() {
 
 	x2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(17)))
 	y2 := ecc.NewFieldElement(big.NewInt(int64(223)), big.NewInt(int64(56)))
-	p3 := ecc.NewEllipticCurvePoint(x2, y2, a, b)
-	res = p1.Add(p3)
+	p2 := ecc.NewEllipticCurvePoint(x2, y2, a, b)
+	res = p1.Add(p2)
 	fmt.Printf("p1 + p2 over field order 223 is %s\n", res)
 
 	res = p1.Add(p1)
